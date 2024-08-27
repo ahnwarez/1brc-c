@@ -56,7 +56,8 @@ void set_station(struct hashmap *map, const char *name, float temperature)
     strncpy(temp.name, name, MAX_CITY_NAME - 1);
     temp.name[MAX_CITY_NAME - 1] = '\0'; // Ensure null-termination
 
-    station_t *existing = hashmap_get(map, &temp);
+    const station_t *temp_existing = hashmap_get(map, &temp);
+    station_t *existing = (station_t *)temp_existing;
     if (existing != NULL)
     {
         if (existing->min > temperature)
